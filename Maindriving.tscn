@@ -1,0 +1,690 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://addons/vehicle_controller_2d/top_down_vehicle.gd" type="Script" id=1]
+[ext_resource path="res://HealthLevel.gd" type="Script" id=2]
+[ext_resource path="res://drink_button.gd" type="Script" id=3]
+[ext_resource path="res://drunk_simulation.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.8, 0.172549, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.345098, 0.14902, 0.00784314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.941176, 0.941176, 0.941176, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 60.4718, 19.9827 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 41.25, 30.25 )
+
+[sub_resource type="Environment" id=7]
+background_mode = 4
+background_canvas_max_layer = 1
+fog_depth_begin = 28.6
+fog_depth_end = 0.0
+dof_blur_near_enabled = true
+dof_blur_near_amount = 0.0
+dof_blur_near_quality = 2
+
+[node name="Maindriving" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DrinkButton" type="Button" parent="CanvasLayer"]
+margin_left = 433.0
+margin_top = 428.0
+margin_right = 593.0
+margin_bottom = 485.0
+text = "Drink"
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+health_bar_path = NodePath("../DrunkLevel")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+margin_left = -10.0
+margin_top = 517.0
+margin_right = 1032.0
+margin_bottom = 607.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLevel" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 200.0
+margin_top = 562.0
+margin_right = 1014.0
+margin_bottom = 593.0
+rect_pivot_offset = Vector2( 405, 35 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrunkLevel" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 200.0
+margin_top = 524.0
+margin_right = 1014.0
+margin_bottom = 555.0
+rect_pivot_offset = Vector2( 405, 35 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+percent_visible = false
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+world_env_path = NodePath("../../WorldEnvironment")
+car_path = NodePath("../../Car")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Roadpiece" type="ColorRect" parent="Area2D"]
+margin_left = 525.0
+margin_top = -553.0
+margin_right = 565.0
+margin_bottom = -513.0
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Roadpiece2" type="ColorRect" parent="Area2D"]
+margin_left = 525.0
+margin_top = -1056.0
+margin_right = 565.0
+margin_bottom = -1016.0
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece2/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece2/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece2/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece2"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Roadpiece3" type="ColorRect" parent="Area2D"]
+margin_left = 525.0
+margin_top = -1265.0
+margin_right = 565.0
+margin_bottom = -1225.0
+rect_rotation = 89.9999
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece3/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece3/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece3/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece3"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Roadpiece4" type="ColorRect" parent="Area2D"]
+margin_left = 1240.0
+margin_top = -1265.0
+margin_right = 1280.0
+margin_bottom = -1225.0
+rect_rotation = 89.9999
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece4/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece4/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece4/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece4"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Roadpiece5" type="ColorRect" parent="Area2D"]
+margin_left = 737.0
+margin_top = -1263.0
+margin_right = 777.0
+margin_bottom = -1223.0
+rect_rotation = 180.0
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece5/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece5/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece5/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece5"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Roadpiece6" type="ColorRect" parent="Area2D"]
+margin_left = 738.0
+margin_top = -1766.0
+margin_right = 778.0
+margin_bottom = -1726.0
+rect_rotation = 180.0
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece6/Side1"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece6/Side1/Area2D"]
+position = Vector2( 486.62, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece6/Side1/Area2D"]
+position = Vector2( -110.984, 19.8235 )
+shape = SubResource( 6 )
+
+[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece6"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Area2D"]
+margin_left = 526.0
+margin_top = -1262.0
+margin_right = 566.0
+margin_bottom = -1222.0
+rect_scale = Vector2( 5.28, 5.18102 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Car" type="RigidBody2D" parent="."]
+position = Vector2( 623, 32 )
+script = ExtResource( 1 )
+input_steer_left = "left"
+input_steer_right = "right"
+input_accelerate = "up"
+input_brake = "down"
+acceleration = 11
+max_forward_velocity = 450
+steering_torque = 3.53
+can_drift = false
+wheel_grip_sticky = 0.593
+wheel_grip_slippery = 0.671
+
+[node name="ColorRect" type="ColorRect" parent="Car"]
+margin_left = -41.0
+margin_top = -55.0
+margin_right = 118.0
+margin_bottom = 234.0
+rect_scale = Vector2( 0.521107, 0.56188 )
+color = Color( 0, 0.133333, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Car"]
+position = Vector2( -0.25, -25.25 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Car"]
+position = Vector2( 3, 13 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 6.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 7 )
+
+[connection signal="pressed" from="CanvasLayer/DrinkButton" to="CanvasLayer/DrinkButton" method="_on_Button_pressed"]
+[connection signal="body_entered" from="Area2D/Roadpiece/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece2/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece2/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece3/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece3/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece4/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece4/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece5/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece5/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece6/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D/Roadpiece6/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
