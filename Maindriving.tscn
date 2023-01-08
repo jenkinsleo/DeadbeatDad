@@ -1,9 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://addons/vehicle_controller_2d/top_down_vehicle.gd" type="Script" id=1]
 [ext_resource path="res://HealthLevel.gd" type="Script" id=2]
 [ext_resource path="res://drink_button.gd" type="Script" id=3]
 [ext_resource path="res://drunk_simulation.gd" type="Script" id=4]
+[ext_resource path="res://Cop.gd" type="Script" id=5]
+[ext_resource path="res://Control.gd" type="Script" id=6]
+[ext_resource path="res://Dialog.gd" type="Script" id=7]
+[ext_resource path="res://Graphic Packs/Car game v4/NPC Vehicles/Police car/Police car.png" type="Texture" id=8]
+[ext_resource path="res://Graphic Packs/Car game v4/Cars/Car blue/Car blue.png" type="Texture" id=9]
+[ext_resource path="res://Tiled/Map.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.8, 0.172549, 0.172549, 1 )
@@ -31,7 +37,7 @@ border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
 extents = Vector2( 60.4718, 19.9827 )
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 41.25, 30.25 )
+extents = Vector2( 36, 30.25 )
 
 [sub_resource type="Environment" id=7]
 background_mode = 4
@@ -44,13 +50,42 @@ dof_blur_near_quality = 2
 
 [node name="Maindriving" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="DrinkButton" type="Button" parent="CanvasLayer"]
-margin_left = 433.0
-margin_top = 428.0
-margin_right = 593.0
-margin_bottom = 485.0
+[node name="CanvasLayer2" type="CanvasLayer" parent="Control"]
+layer = 5
+
+[node name="Objectives" type="ColorRect" parent="Control/CanvasLayer2"]
+margin_left = 852.0
+margin_right = 1028.0
+margin_bottom = 278.0
+color = Color( 0.305882, 0.188235, 0.188235, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer2/Objectives"]
+margin_top = 9.0
+margin_right = 176.0
+margin_bottom = 49.0
+text = "Hello"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="DrinkButton" type="Button" parent="Control/CanvasLayer"]
+margin_left = 17.0
+margin_top = 436.0
+margin_right = 177.0
+margin_bottom = 493.0
 text = "Drink"
 script = ExtResource( 3 )
 __meta__ = {
@@ -58,7 +93,7 @@ __meta__ = {
 }
 health_bar_path = NodePath("../DrunkLevel")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer"]
 margin_left = -10.0
 margin_top = 517.0
 margin_right = 1032.0
@@ -67,7 +102,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthLevel" type="ProgressBar" parent="CanvasLayer"]
+[node name="HealthLevel" type="ProgressBar" parent="Control/CanvasLayer"]
 margin_left = 200.0
 margin_top = 562.0
 margin_right = 1014.0
@@ -82,7 +117,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DrunkLevel" type="ProgressBar" parent="CanvasLayer"]
+[node name="DrunkLevel" type="ProgressBar" parent="Control/CanvasLayer"]
 margin_left = 200.0
 margin_top = 524.0
 margin_right = 1014.0
@@ -90,6 +125,7 @@ margin_bottom = 555.0
 rect_pivot_offset = Vector2( 405, 35 )
 custom_styles/fg = SubResource( 2 )
 custom_styles/bg = SubResource( 3 )
+value = 60.0
 percent_visible = false
 script = ExtResource( 4 )
 __meta__ = {
@@ -98,9 +134,43 @@ __meta__ = {
 world_env_path = NodePath("../../WorldEnvironment")
 car_path = NodePath("../../Car")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Dialog window" type="ColorRect" parent="Control/CanvasLayer"]
+margin_left = -24.0
+margin_top = 436.0
+margin_right = 1050.0
+margin_bottom = 658.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+leftbuttonpath = NodePath("Button")
+rightbuttonpath = NodePath("Button2")
 
-[node name="Roadpiece" type="ColorRect" parent="Area2D"]
+[node name="Button" type="Button" parent="Control/CanvasLayer/Dialog window"]
+margin_left = 64.0
+margin_top = 14.0
+margin_right = 487.0
+margin_bottom = 145.0
+rect_pivot_offset = Vector2( -475, 0 )
+text = "No sir ive had nothing to drink today"
+
+[node name="Button2" type="Button" parent="Control/CanvasLayer/Dialog window"]
+margin_left = 575.0
+margin_top = 14.0
+margin_right = 1006.0
+margin_bottom = 145.0
+rect_pivot_offset = Vector2( -444, -22 )
+text = "Yea ive had a few to drink today"
+
+[node name="Map" type="Sprite" parent="Control"]
+position = Vector2( -267, -1609 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 10 )
+
+[node name="Area2D" type="Area2D" parent="Control"]
+visible = false
+
+[node name="Roadpiece" type="ColorRect" parent="Control/Area2D"]
 margin_left = 525.0
 margin_top = -553.0
 margin_right = 565.0
@@ -111,7 +181,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="ColorRect" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 17.5379
 margin_top = 1.67184
 margin_right = 57.5379
@@ -121,7 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="ColorRect2" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 17.5379
 margin_top = 9.6331
 margin_right = 57.5379
@@ -131,7 +201,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="ColorRect3" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 17.7265
 margin_top = 17.674
 margin_right = 57.7265
@@ -141,7 +211,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="ColorRect4" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 17.915
 margin_top = 25.6352
 margin_right = 57.915
@@ -151,7 +221,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="ColorRect5" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 17.915
 margin_top = 33.9945
 margin_right = 57.915
@@ -161,7 +231,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="Side1" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = -5.09161
 margin_top = -7.62939e-06
 margin_right = 34.9084
@@ -169,17 +239,17 @@ margin_bottom = 40.0
 rect_scale = Vector2( 0.132535, 1 )
 color = Color( 0.886275, 0.819608, 0.101961, 1 )
 
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece/Side1"]
+[node name="Area2D" type="Area2D" parent="Control/Area2D/Roadpiece/Side1"]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece/Side1/Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Control/Area2D/Roadpiece/Side1/Area2D"]
 position = Vector2( 486.62, 19.8235 )
 shape = SubResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece/Side1/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Area2D/Roadpiece/Side1/Area2D"]
 position = Vector2( -110.984, 19.8235 )
 shape = SubResource( 6 )
 
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece"]
+[node name="Side2" type="ColorRect" parent="Control/Area2D/Roadpiece"]
 margin_left = 40.1674
 margin_top = 0.0796089
 margin_right = 80.1674
@@ -187,457 +257,7 @@ margin_bottom = 40.0796
 rect_scale = Vector2( 0.132535, 1 )
 color = Color( 0.886275, 0.819608, 0.101961, 1 )
 
-[node name="Roadpiece2" type="ColorRect" parent="Area2D"]
-margin_left = 525.0
-margin_top = -1056.0
-margin_right = 565.0
-margin_bottom = -1016.0
-rect_scale = Vector2( 5.30281, 12.5608 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 17.5379
-margin_top = 1.67184
-margin_right = 57.5379
-margin_bottom = 41.6718
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 17.5379
-margin_top = 9.6331
-margin_right = 57.5379
-margin_bottom = 49.6331
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 17.7265
-margin_top = 17.674
-margin_right = 57.7265
-margin_bottom = 57.674
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 17.915
-margin_top = 25.6352
-margin_right = 57.915
-margin_bottom = 65.6352
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 17.915
-margin_top = 33.9945
-margin_right = 57.915
-margin_bottom = 73.9945
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = -5.09161
-margin_top = -7.62939e-06
-margin_right = 34.9084
-margin_bottom = 40.0
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece2/Side1"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece2/Side1/Area2D"]
-position = Vector2( 486.62, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece2/Side1/Area2D"]
-position = Vector2( -110.984, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece2"]
-margin_left = 40.1674
-margin_top = 0.0796089
-margin_right = 80.1674
-margin_bottom = 40.0796
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Roadpiece3" type="ColorRect" parent="Area2D"]
-margin_left = 525.0
-margin_top = -1265.0
-margin_right = 565.0
-margin_bottom = -1225.0
-rect_rotation = 89.9999
-rect_scale = Vector2( 5.30281, 12.5608 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 17.5379
-margin_top = 1.67184
-margin_right = 57.5379
-margin_bottom = 41.6718
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 17.5379
-margin_top = 9.6331
-margin_right = 57.5379
-margin_bottom = 49.6331
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 17.7265
-margin_top = 17.674
-margin_right = 57.7265
-margin_bottom = 57.674
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 17.915
-margin_top = 25.6352
-margin_right = 57.915
-margin_bottom = 65.6352
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 17.915
-margin_top = 33.9945
-margin_right = 57.915
-margin_bottom = 73.9945
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = -5.09161
-margin_top = -7.62939e-06
-margin_right = 34.9084
-margin_bottom = 40.0
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece3/Side1"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece3/Side1/Area2D"]
-position = Vector2( 486.62, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece3/Side1/Area2D"]
-position = Vector2( -110.984, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece3"]
-margin_left = 40.1674
-margin_top = 0.0796089
-margin_right = 80.1674
-margin_bottom = 40.0796
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Roadpiece4" type="ColorRect" parent="Area2D"]
-margin_left = 1240.0
-margin_top = -1265.0
-margin_right = 1280.0
-margin_bottom = -1225.0
-rect_rotation = 89.9999
-rect_scale = Vector2( 5.30281, 12.5608 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 17.5379
-margin_top = 1.67184
-margin_right = 57.5379
-margin_bottom = 41.6718
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 17.5379
-margin_top = 9.6331
-margin_right = 57.5379
-margin_bottom = 49.6331
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 17.7265
-margin_top = 17.674
-margin_right = 57.7265
-margin_bottom = 57.674
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 17.915
-margin_top = 25.6352
-margin_right = 57.915
-margin_bottom = 65.6352
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 17.915
-margin_top = 33.9945
-margin_right = 57.915
-margin_bottom = 73.9945
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = -5.09161
-margin_top = -7.62939e-06
-margin_right = 34.9084
-margin_bottom = 40.0
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece4/Side1"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece4/Side1/Area2D"]
-position = Vector2( 486.62, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece4/Side1/Area2D"]
-position = Vector2( -110.984, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece4"]
-margin_left = 40.1674
-margin_top = 0.0796089
-margin_right = 80.1674
-margin_bottom = 40.0796
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Roadpiece5" type="ColorRect" parent="Area2D"]
-margin_left = 737.0
-margin_top = -1263.0
-margin_right = 777.0
-margin_bottom = -1223.0
-rect_rotation = 180.0
-rect_scale = Vector2( 5.30281, 12.5608 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 17.5379
-margin_top = 1.67184
-margin_right = 57.5379
-margin_bottom = 41.6718
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 17.5379
-margin_top = 9.6331
-margin_right = 57.5379
-margin_bottom = 49.6331
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 17.7265
-margin_top = 17.674
-margin_right = 57.7265
-margin_bottom = 57.674
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 17.915
-margin_top = 25.6352
-margin_right = 57.915
-margin_bottom = 65.6352
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 17.915
-margin_top = 33.9945
-margin_right = 57.915
-margin_bottom = 73.9945
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = -5.09161
-margin_top = -7.62939e-06
-margin_right = 34.9084
-margin_bottom = 40.0
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece5/Side1"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece5/Side1/Area2D"]
-position = Vector2( 486.62, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece5/Side1/Area2D"]
-position = Vector2( -110.984, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece5"]
-margin_left = 40.1674
-margin_top = 0.0796089
-margin_right = 80.1674
-margin_bottom = 40.0796
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Roadpiece6" type="ColorRect" parent="Area2D"]
-margin_left = 738.0
-margin_top = -1766.0
-margin_right = 778.0
-margin_bottom = -1726.0
-rect_rotation = 180.0
-rect_scale = Vector2( 5.30281, 12.5608 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 17.5379
-margin_top = 1.67184
-margin_right = 57.5379
-margin_bottom = 41.6718
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect2" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 17.5379
-margin_top = 9.6331
-margin_right = 57.5379
-margin_bottom = 49.6331
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect3" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 17.7265
-margin_top = 17.674
-margin_right = 57.7265
-margin_bottom = 57.674
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect4" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 17.915
-margin_top = 25.6352
-margin_right = 57.915
-margin_bottom = 65.6352
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect5" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 17.915
-margin_top = 33.9945
-margin_right = 57.915
-margin_bottom = 73.9945
-rect_scale = Vector2( 0.117449, 0.128822 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Side1" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = -5.09161
-margin_top = -7.62939e-06
-margin_right = 34.9084
-margin_bottom = 40.0
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="Area2D" type="Area2D" parent="Area2D/Roadpiece6/Side1"]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Roadpiece6/Side1/Area2D"]
-position = Vector2( 486.62, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Roadpiece6/Side1/Area2D"]
-position = Vector2( -110.984, 19.8235 )
-shape = SubResource( 6 )
-
-[node name="Side2" type="ColorRect" parent="Area2D/Roadpiece6"]
-margin_left = 40.1674
-margin_top = 0.0796089
-margin_right = 80.1674
-margin_bottom = 40.0796
-rect_scale = Vector2( 0.132535, 1 )
-color = Color( 0.886275, 0.819608, 0.101961, 1 )
-
-[node name="ColorRect" type="ColorRect" parent="Area2D"]
-margin_left = 526.0
-margin_top = -1262.0
-margin_right = 566.0
-margin_bottom = -1222.0
-rect_scale = Vector2( 5.28, 5.18102 )
-color = Color( 0.282353, 0.282353, 0.282353, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Car" type="RigidBody2D" parent="."]
+[node name="Car" type="RigidBody2D" parent="Control"]
 position = Vector2( 623, 32 )
 script = ExtResource( 1 )
 input_steer_left = "left"
@@ -651,40 +271,71 @@ can_drift = false
 wheel_grip_sticky = 0.593
 wheel_grip_slippery = 0.671
 
-[node name="ColorRect" type="ColorRect" parent="Car"]
+[node name="ColorRect" type="ColorRect" parent="Control/Car"]
 margin_left = -41.0
-margin_top = -55.0
+margin_top = -64.0
 margin_right = 118.0
-margin_bottom = 234.0
+margin_bottom = 225.0
 rect_scale = Vector2( 0.521107, 0.56188 )
-color = Color( 0, 0.133333, 1, 1 )
+color = Color( 0, 0.133333, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Car"]
-position = Vector2( -0.25, -25.25 )
+[node name="TextureRect" type="TextureRect" parent="Control/Car/ColorRect"]
+margin_left = -67.1647
+margin_right = 208.835
+margin_bottom = 253.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Car"]
+position = Vector2( -4, -32 )
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="Car"]
+[node name="Camera2D" type="Camera2D" parent="Control/Car"]
 position = Vector2( 3, 13 )
 current = true
 smoothing_enabled = true
-smoothing_speed = 6.0
+smoothing_speed = 8.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="Cop" type="Area2D" parent="Control/Car"]
+position = Vector2( -5, 404 )
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="Control/Car/Cop"]
+margin_left = -36.0
+margin_top = -276.0
+margin_bottom = -113.0
+rect_scale = Vector2( 2.28, 1 )
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control/Car/Cop/ColorRect"]
+margin_left = -17.1052
+margin_right = 53.8948
+margin_bottom = 160.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control"]
 environment = SubResource( 7 )
 
-[connection signal="pressed" from="CanvasLayer/DrinkButton" to="CanvasLayer/DrinkButton" method="_on_Button_pressed"]
-[connection signal="body_entered" from="Area2D/Roadpiece/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece2/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece2/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece3/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece3/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece4/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece4/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece5/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece5/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece6/Side1/Area2D" to="CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D/Roadpiece6/Side1/Area2D" to="CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="pressed" from="Control/CanvasLayer/DrinkButton" to="Control/CanvasLayer/DrinkButton" method="_on_Button_pressed"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Dialog window" to="Control/Car" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Dialog window" to="Control/Car/Cop" method="_on_Dialog_window_dialogpass"]
+[connection signal="pressed" from="Control/CanvasLayer/Dialog window/Button" to="Control/CanvasLayer/Dialog window" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Dialog window/Button2" to="Control/CanvasLayer/Dialog window" method="_on_Button2_pressed"]
+[connection signal="body_entered" from="Control/Area2D/Roadpiece/Side1/Area2D" to="Control/CanvasLayer/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Control/Area2D/Roadpiece/Side1/Area2D" to="Control/CanvasLayer/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="carstopped" from="Control/Car" to="Control/Car/Cop" method="_on_Car_carstopped"]
+[connection signal="copvisible" from="Control/Car/Cop" to="Control/Car" method="_on_Cop_copvisible"]
+[connection signal="startmessage" from="Control/Car/Cop" to="Control/CanvasLayer/Dialog window" method="_on_Cop_startmessage"]

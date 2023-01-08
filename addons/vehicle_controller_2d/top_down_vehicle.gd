@@ -1,5 +1,5 @@
 extends RigidBody2D
-
+signal carstopped
 # ---------------------------------------------------------
 # QUICK HOW-TO:
 # - Make your changes in the Editor by selecting the Node
@@ -13,6 +13,10 @@ export (String) var input_steer_left = "steer_left"
 export (String) var input_steer_right = "steer_right"
 export (String) var input_accelerate = "accelerate"
 export (String) var input_brake = "brake"
+
+export var countframe = 400
+var act = false
+var current = 0
 
 # Joystick Deadzone Thresholds
 var stick_min = 0.07 # If the axis is smaller, behave as if it were 0
@@ -47,6 +51,12 @@ func _ready():
 
 # Fixed Process
 func _physics_process(delta):
+	if act == true:
+		current += 1
+		
+	if _velocity <= Vector2(0.3,0.3) and current >= countframe:
+		emit_signal("carstopped")
+		
 	# Drag (0 means we will never slow down ever. Like being in space.)
 	_velocity *= drag_coefficient
 	
@@ -136,3 +146,16 @@ func get_up_velocity():
 # Returns right velocity
 func get_right_velocity():
 	return get_right() * _velocity.dot(get_right())
+
+
+func _on_Cop_copvisible():
+	act = true
+	input_accelerate = "null"
+	input_brake = "null"
+
+
+func _on_Dialog_window_dialogpass():
+	act = false
+	input_accelerate = "up"
+	input_brake = "down"
+	current = 0
