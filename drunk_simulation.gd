@@ -42,11 +42,11 @@ func _physics_process(delta):
 			print("started")
 			main_count = rng.randf_range(100, 300)
 			active_run = true
-			if value < 10:
+			if value < 19:
 				active_frames = 0
-			elif value < 25:
+			elif value < 35:
 				active_frames = 8
-			elif value < 45:
+			elif value < 55:
 				active_frames = 13
 			else:
 				active_frames = 20

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/nolie.mp3-c5384f7b7bcd20ef0c7e780e78eaa9ce.mp3str"
+
+[deps]
+
+source_file="res://Music/nolie.mp3"
+dest_files=[ "res://.import/nolie.mp3-c5384f7b7bcd20ef0c7e780e78eaa9ce.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

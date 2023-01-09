@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/morem.mp3-8a807883d515c5d6e9f6bf64a33917ab.mp3str"
+
+[deps]
+
+source_file="res://Music/morem.mp3"
+dest_files=[ "res://.import/morem.mp3-8a807883d515c5d6e9f6bf64a33917ab.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

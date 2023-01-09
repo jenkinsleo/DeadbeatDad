@@ -1,7 +1,7 @@
 extends ProgressBar
 
 export var renew_health = 600
-export var step_value = 5
+export var step_value = 10
 export var fake_value = 100
 var current_frame_delay = 0
 
