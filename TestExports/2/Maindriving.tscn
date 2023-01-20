@@ -1,0 +1,951 @@
+[gd_scene load_steps=61 format=2]
+
+[ext_resource path="res://addons/vehicle_controller_2d/top_down_vehicle.gd" type="Script" id=1]
+[ext_resource path="res://HealthLevel.gd" type="Script" id=2]
+[ext_resource path="res://drink_button.gd" type="Script" id=3]
+[ext_resource path="res://drunk_simulation.gd" type="Script" id=4]
+[ext_resource path="res://Cop.gd" type="Script" id=5]
+[ext_resource path="res://Control.gd" type="Script" id=6]
+[ext_resource path="res://Dialog.gd" type="Script" id=7]
+[ext_resource path="res://Graphic Packs/Car game v4/NPC Vehicles/Police car/Police car.png" type="Texture" id=8]
+[ext_resource path="res://Graphic Packs/Car game v4/Cars/Car blue/Car blue.png" type="Texture" id=9]
+[ext_resource path="res://Tiled/Map.png" type="Texture" id=10]
+[ext_resource path="res://Graphic Packs/Small_city_Extra/8px/small_city_extra_tileset.png" type="Texture" id=11]
+[ext_resource path="res://Coronabottle.png" type="Texture" id=12]
+[ext_resource path="res://ObjectiveController.gd" type="Script" id=13]
+[ext_resource path="res://zx_spectrum-7.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://BackgroundMusic.gd" type="Script" id=15]
+[ext_resource path="res://Tiled/MiniMap.png" type="Texture" id=16]
+[ext_resource path="res://Menu.gd" type="Script" id=17]
+[ext_resource path="res://CarFollower.gd" type="Script" id=18]
+[ext_resource path="res://Graphic Packs/Car game v4/Cars/Car grey/Car grey.png" type="Texture" id=19]
+
+[sub_resource type="DynamicFont" id=39]
+size = 13
+outline_color = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=37]
+size = 19
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=38]
+outline_color = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+font_data = ExtResource( 14 )
+
+[sub_resource type="Theme" id=26]
+
+[sub_resource type="StyleBoxFlat" id=28]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxEmpty" id=29]
+
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.262745, 0.262745, 0.262745, 0.776471 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 1, 1, 1, 0.345098 )
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.8, 0.172549, 0.172549, 0.686275 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.941176, 0.941176, 0.941176, 0.34902 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.345098, 0.14902, 0.00784314, 0.631373 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.941176, 0.941176, 0.941176, 0.34902 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+
+[sub_resource type="RectangleShape2D" id=31]
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 15.1864, 10 )
+
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 15.2574, 11.1558 )
+
+[sub_resource type="RectangleShape2D" id=34]
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 7.51773, 10 )
+
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 7.06807, 9.11697 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 787.111, 37.5175 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 230.637, 16.9277 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 1787.83, 38.2141 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 1530.83, 5.81174 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 2659.33, 37.4976 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 564.877, 62.0184 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 2230.34, 32.1635 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 1588.63, 63.8495 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 788.978, 63.8495 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 1360.61, 33.8752 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 662.432, 33.8752 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 387.419, 33.8752 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 1655.7, 9.93172 )
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 225.396, 83.3048 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 225.396, 155.538 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 947.919, 23.0815 )
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 1089.35, 10.8243 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 3079.51, 10.8243 )
+
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 373.609, 44.502 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 36, 30.25 )
+
+[sub_resource type="Environment" id=7]
+background_mode = 4
+background_canvas_max_layer = 1
+fog_depth_begin = 28.6
+fog_depth_end = 0.0
+dof_blur_near_enabled = true
+dof_blur_near_amount = 0.0
+dof_blur_near_quality = 2
+
+[sub_resource type="Curve2D" id=40]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -2663, -1123, 0, 0, 0, 0, -4813, -1129, 0, 0, 0, 0, -4846, -1133, 0, 0, 0, 0, -4862, -1136, 0, 0, 0, 0, -4876, -1139, 0, 0, 0, 0, -4894, -1143, 0, 0, 0, 0, -4912, -1148, 0, 0, 0, 0, -4925, -1157, 0, 0, 0, 0, -4934, -1167, 0, 0, 0, 0, -4942, -1178, 0, 0, 0, 0, -4948, -1186, 0, 0, 0, 0, -4956, -1200, 0, 0, 0, 0, -4961, -1214, 0, 0, 0, 0, -4967, -1227, 0, 0, 0, 0, -4970, -1236, 0, 0, 0, 0, -4974, -1251, 0, 0, 0, 0, -4982, -1271, 0, 0, 0, 0, -4986, -1293, 0, 0, 0, 0, -4989, -1397, 0, 0, 0, 0, -4987, -1514, 0, 0, 0, 0, -4984, -2725, 0, 0, 0, 0, -4984, -2809, 0, 0, 0, 0, -4981, -2954, 0, 0, 0, 0, -4980, -2971, 0, 0, 0, 0, -4975, -2985, 0, 0, 0, 0, -4967, -3002, 0, 0, 0, 0, -4960, -3012, 0, 0, 0, 0, -4952, -3021, 0, 0, 0, 0, -4938, -3034, 0, 0, 0, 0, -4926, -3042, 0, 0, 0, 0, -4913, -3046, 0, 0, 0, 0, -4897, -3048, 0, 0, 0, 0, -4868, -3047, 0, 0, 0, 0, -4780, -3047, 0, 0, 0, 0, -2660, -3045, 0, 0, 0, 0, -2493, -3043, 0, 0, 0, 0, -2476, -3042, 0, 0, 0, 0, -2460, -3034, 0, 0, 0, 0, -2449, -3018, 0, 0, 0, 0, -2437, -2995, 0, 0, 0, 0, -2432, -2972, 0, 0, 0, 0, -2431, -2898, 0, 0, 0, 0, -2424, -2728, 0, 0, 0, 0, -2426, -1360, 0, 0, 0, 0, -2429, -1248, 0, 0, 0, 0, -2430, -1217, 0, 0, 0, 0, -2436, -1187, 0, 0, 0, 0, -2452, -1161, 0, 0, 0, 0, -2473, -1143, 0, 0, 0, 0, -2496, -1133, 0, 0, 0, 0, -2516, -1130, 0, 0, 0, 0, -2544, -1129, 0, 0, 0, 0, -2663, -1123 )
+}
+
+[sub_resource type="Curve2D" id=41]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1691, -4563, 0, 0, 0, 0, -2260, -4564, 0, 0, 0, 0, -2265, -4099, 0, 0, 0, 0, -2267, -4038, 0, 0, 0, 0, -2280, -3995, 0, 0, 0, 0, -2301, -3958, 0, 0, 0, 0, -2343, -3943, 0, 0, 0, 0, -2415, -3931, 0, 0, 0, 0, -2486, -3927, 0, 0, 0, 0, -3940, -3924, 0, 0, 0, 0, -3948, -4569, 0, 0, 0, 0, -5147, -4568, 0, 0, 0, 0, -5144, -960, 0, 0, 0, 0, -2628, -968, 0, 0, 0, 0, -1004, -963, 0, 0, 0, 0, 596, -959, 0, 0, 0, 0, 937, -1365, 0, 0, 0, 0, 935, -3203, 0, 0, 0, 0, -4983, -3206, 0, 0, 0, 0, -4985, -4402, 0, 0, 0, 0, -4111, -4397, 0, 0, 0, 0, -4102, -3759, 0, 0, 0, 0, -2109, -3764, 0, 0, 0, 0, -2103, -4401, 0, 0, 0, 0, -825, -4393, 0, 0, 0, 0, 1576, -4393, 0, 0, 0, 0, 1576, -1123, 0, 0, 0, 0, 1094, -1124, 0, 0, 0, 0, 1106, -958, 0, 0, 0, 0, 1728, -962, 0, 0, 0, 0, 1738, -4554, 0, 0, 0, 0, 1693, -4557 )
+}
+
+[node name="Maindriving" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Control"]
+layer = 5
+
+[node name="Menu" type="Area2D" parent="Control/CanvasLayer2"]
+visible = false
+position = Vector2( 540, 238 )
+script = ExtResource( 17 )
+objectives = NodePath("../Objectives")
+canvaslayer1 = NodePath("../../CanvasLayer/Node2D")
+
+[node name="MiniMap" type="Sprite" parent="Control/CanvasLayer2/Menu"]
+visible = false
+position = Vector2( 146, 0 )
+scale = Vector2( 0.367745, 0.367745 )
+texture = ExtResource( 16 )
+
+[node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer2/Menu"]
+margin_left = -550.0
+margin_top = 261.0
+margin_right = -242.0
+margin_bottom = 365.0
+color = Color( 0.0117647, 0.0117647, 0.0117647, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Button" parent="Control/CanvasLayer2/Menu/ColorRect"]
+margin_left = 46.0
+margin_top = 68.0
+margin_right = 82.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="forward" type="Button" parent="Control/CanvasLayer2/Menu/ColorRect"]
+margin_left = 224.0
+margin_top = 68.0
+margin_right = 260.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="play" type="Button" parent="Control/CanvasLayer2/Menu/ColorRect"]
+margin_left = 136.0
+margin_top = 68.0
+margin_right = 172.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/CanvasLayer2/Menu/ColorRect"]
+margin_left = 11.0
+margin_top = -7.0
+margin_right = 299.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 39 )
+text = "a"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/CanvasLayer2/Menu/ColorRect"]
+volume_db = -10.0
+autoplay = true
+script = ExtResource( 15 )
+songs = {
+0: [ "Bank Account - 21 Savage", "res://Music/bankaccount.mp3" ],
+1: [ "More M's - Drake, 21 Savage", "res://Music/morem.mp3" ],
+2: [ "Blinding Lights - The Weeknd", "res://Music/blindinglights.mp3" ],
+3: [ "No Lie - Sean Paul, Dua Lipa", "res://Music/nolie.mp3" ],
+4: [ "One Dance - Drake, Leo", "res://Music/onedance.mp3" ]
+}
+atext = NodePath("../Label")
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Control/CanvasLayer2/Menu"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Camera2D" type="Camera2D" parent="Control/CanvasLayer2/Menu/ViewportContainer"]
+visible = false
+position = Vector2( -2406, -1976 )
+scale = Vector2( 5.2, 1 )
+zoom = Vector2( 7.8, 10.5 )
+
+[node name="Objectives" type="ColorRect" parent="Control/CanvasLayer2"]
+margin_left = 720.0
+margin_right = 1028.0
+margin_bottom = 122.0
+color = Color( 0.0117647, 0.0117647, 0.0117647, 0.521569 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer2/Objectives"]
+margin_top = 9.0
+margin_right = 308.0
+margin_bottom = 50.0
+custom_fonts/normal_font = SubResource( 37 )
+bbcode_enabled = true
+bbcode_text = "[center]Current Objective:[center]"
+text = "Current Objective:"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/CanvasLayer2/Objectives"]
+margin_left = 11.0
+margin_top = 25.0
+margin_right = 299.0
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 38 )
+text = "a"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="Control/CanvasLayer2"]
+position = Vector2( 883, 161 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Node2D" type="Node2D" parent="Control/CanvasLayer"]
+
+[node name="DrinkButton" type="Button" parent="Control/CanvasLayer/Node2D"]
+margin_left = 17.0
+margin_top = 380.0
+margin_right = 108.0
+margin_bottom = 509.0
+theme = SubResource( 26 )
+custom_styles/hover = SubResource( 28 )
+custom_styles/pressed = SubResource( 29 )
+custom_styles/disabled = SubResource( 30 )
+custom_styles/normal = SubResource( 27 )
+icon = ExtResource( 12 )
+expand_icon = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+health_bar_path = NodePath("../DrunkLevel")
+thispath = NodePath(".")
+
+[node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer/Node2D"]
+margin_left = -10.0
+margin_top = 517.0
+margin_right = 1032.0
+margin_bottom = 607.0
+color = Color( 1, 1, 1, 0.266667 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthLevel" type="ProgressBar" parent="Control/CanvasLayer/Node2D"]
+margin_left = 200.0
+margin_top = 562.0
+margin_right = 1014.0
+margin_bottom = 593.0
+rect_pivot_offset = Vector2( 405, 35 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DrunkLevel" type="ProgressBar" parent="Control/CanvasLayer/Node2D"]
+margin_left = 200.0
+margin_top = 524.0
+margin_right = 1014.0
+margin_bottom = 555.0
+rect_pivot_offset = Vector2( 405, 35 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+percent_visible = false
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+world_env_path = NodePath("../../../WorldEnvironment")
+car_path = NodePath("../../../Car")
+
+[node name="Dialog window" type="ColorRect" parent="Control/CanvasLayer/Node2D"]
+visible = false
+margin_left = -24.0
+margin_top = 436.0
+margin_right = 1050.0
+margin_bottom = 658.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+leftbuttonpath = NodePath("Button")
+rightbuttonpath = NodePath("Button2")
+
+[node name="Button" type="Button" parent="Control/CanvasLayer/Node2D/Dialog window"]
+margin_left = 64.0
+margin_top = 14.0
+margin_right = 487.0
+margin_bottom = 145.0
+rect_pivot_offset = Vector2( -475, 0 )
+text = "No sir ive had nothing to drink today"
+
+[node name="Button2" type="Button" parent="Control/CanvasLayer/Node2D/Dialog window"]
+margin_left = 575.0
+margin_top = 14.0
+margin_right = 1006.0
+margin_bottom = 145.0
+rect_pivot_offset = Vector2( -444, -22 )
+text = "Yea ive had a few to drink today"
+
+[node name="Map" type="Sprite" parent="Control"]
+position = Vector2( -267, -1609 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 10 )
+
+[node name="Node2D" type="Node2D" parent="Control/Map"]
+script = ExtResource( 13 )
+textpath = NodePath("../../CanvasLayer2/Objectives/Label")
+playernode = NodePath("MainHouse/MainHouse")
+
+[node name="MainHouse" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( -1024.8, 319.2 )
+scale = Vector2( 2.96363, 2.90833 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 32.6452, 24.2119, 22.1915, 24.9655 )
+
+[node name="MainHouse" type="Area2D" parent="Control/Map/Node2D/MainHouse"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/MainHouse/MainHouse"]
+position = Vector2( 0, 0.893991 )
+shape = SubResource( 31 )
+
+[node name="Hospital" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( -568.3, 36.7 )
+scale = Vector2( 2.58125, 2.325 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 80.0666, -0.141675, 32.6062, 24.4181 )
+
+[node name="Hospital" type="Area2D" parent="Control/Map/Node2D/Hospital"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/Hospital/Hospital"]
+position = Vector2( -0.6586, 0 )
+shape = SubResource( 32 )
+
+[node name="School" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( -472.2, -526 )
+scale = Vector2( 2.56925, 2.46923 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 95.8677, 30.6291, 32.2197, 26.0403 )
+
+[node name="School" type="Area2D" parent="Control/Map/Node2D/School"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/School/School"]
+position = Vector2( -0.155685, 1.15576 )
+shape = SubResource( 33 )
+
+[node name="Bar" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( 136.4, 40.3 )
+scale = Vector2( 2.08333, 2.11304 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 79.9696, 64.5495, 24.4251, 23.6824 )
+
+[node name="Bar" type="Area2D" parent="Control/Map/Node2D/Bar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/Bar/Bar"]
+shape = SubResource( 34 )
+
+[node name="Church" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( 129, -375 )
+scale = Vector2( 2.82, 2.24167 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 117.923, 1.64261, 20.7978, 24.1806 )
+
+[node name="Church" type="Area2D" parent="Control/Map/Node2D/Church"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/Church/Church"]
+position = Vector2( -0.212761, 0 )
+shape = SubResource( 35 )
+
+[node name="Friend" type="Sprite" parent="Control/Map/Node2D"]
+position = Vector2( 449, -438.8 )
+scale = Vector2( 2.74474, 2.42895 )
+texture = ExtResource( 11 )
+region_enabled = true
+region_rect = Rect2( 150.397, 29.0819, 19.9764, 19.0683 )
+
+[node name="Friend" type="Area2D" parent="Control/Map/Node2D/Friend"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Map/Node2D/Friend/Friend"]
+position = Vector2( -0.218613, 0.883026 )
+shape = SubResource( 36 )
+
+[node name="Area2D2" type="Area2D" parent="Control"]
+visible = false
+position = Vector2( 498, -553 )
+scale = Vector2( 0.702808, 12.5608 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -2906.02, 17.6542 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -651.672, 17.674 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -1780, 14.808 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -1780, -264.553 )
+shape = SubResource( 25 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -6188.75, 17.9129 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -6721.44, 100.392 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -1832.65, 131.998 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( 1431.4, 41.0006 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -6735.13, 178.094 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -5971.76, -122.604 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -2897.66, -122.604 )
+shape = SubResource( 14 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -651.672, -122.604 )
+shape = SubResource( 14 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -80.0363, -259.697 )
+shape = SubResource( 15 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -2806.51, -259.697 )
+shape = SubResource( 16 )
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -7162.7, -259.697 )
+shape = SubResource( 17 )
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -5123.22, -234.698 )
+shape = SubResource( 18 )
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( 1091.92, -142.537 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( 2256.66, -176.954 )
+shape = SubResource( 20 )
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -8490.23, -176.979 )
+shape = SubResource( 20 )
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -5112.64, -304.997 )
+shape = SubResource( 21 )
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -7152.17, -343.529 )
+shape = SubResource( 22 )
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -1061.89, -343.529 )
+shape = SubResource( 23 )
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="Control/Area2D2"]
+position = Vector2( -9326.87, 99.8359 )
+shape = SubResource( 24 )
+
+[node name="Area2D" type="Area2D" parent="Control"]
+visible = false
+
+[node name="Roadpiece" type="ColorRect" parent="Control/Area2D"]
+margin_left = 525.0
+margin_top = -553.0
+margin_right = 565.0
+margin_bottom = -513.0
+rect_scale = Vector2( 5.30281, 12.5608 )
+color = Color( 0.282353, 0.282353, 0.282353, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 17.5379
+margin_top = 1.67184
+margin_right = 57.5379
+margin_bottom = 41.6718
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 17.5379
+margin_top = 9.6331
+margin_right = 57.5379
+margin_bottom = 49.6331
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 17.7265
+margin_top = 17.674
+margin_right = 57.7265
+margin_bottom = 57.674
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 17.915
+margin_top = 25.6352
+margin_right = 57.915
+margin_bottom = 65.6352
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 17.915
+margin_top = 33.9945
+margin_right = 57.915
+margin_bottom = 73.9945
+rect_scale = Vector2( 0.117449, 0.128822 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Side1" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = -5.09161
+margin_top = -7.62939e-06
+margin_right = 34.9084
+margin_bottom = 40.0
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Side2" type="ColorRect" parent="Control/Area2D/Roadpiece"]
+margin_left = 40.1674
+margin_top = 0.0796089
+margin_right = 80.1674
+margin_bottom = 40.0796
+rect_scale = Vector2( 0.132535, 1 )
+color = Color( 0.886275, 0.819608, 0.101961, 1 )
+
+[node name="Car" type="RigidBody2D" parent="Control"]
+position = Vector2( -2344, -166 )
+script = ExtResource( 1 )
+input_steer_left = "left"
+input_steer_right = "right"
+input_accelerate = "up"
+input_brake = "down"
+acceleration = 13
+max_forward_velocity = 500
+wheel_grip_sticky = 0.408
+
+[node name="ColorRect" type="ColorRect" parent="Control/Car"]
+margin_left = -41.0
+margin_top = -64.0
+margin_right = 118.0
+margin_bottom = 225.0
+rect_scale = Vector2( 0.521107, 0.56188 )
+color = Color( 0, 0.133333, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control/Car/ColorRect"]
+margin_left = -67.1647
+margin_right = 208.835
+margin_bottom = 253.0
+rect_scale = Vector2( 1, 1.00167 )
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Car"]
+position = Vector2( -4, -32 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Control/Car"]
+position = Vector2( 3, 13 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+
+[node name="Cop" type="Area2D" parent="Control/Car"]
+position = Vector2( -5, 404 )
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="Control/Car/Cop"]
+margin_left = -36.0
+margin_top = -276.0
+margin_bottom = -113.0
+rect_scale = Vector2( 2.28, 1 )
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control/Car/Cop/ColorRect"]
+margin_left = -17.1052
+margin_right = 53.8948
+margin_bottom = 160.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Control"]
+environment = SubResource( 7 )
+
+[node name="Ai Cars" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Ai Cars"]
+curve = SubResource( 40 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -2663, -1123 )
+rotation = -3.1388
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -4986.93, -1542.2 )
+rotation = -1.56833
+offset = 2654.55
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D2"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -4984.85, -2383.4 )
+rotation = -1.56832
+offset = 3502.54
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D3"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -3985.26, -3046.25 )
+rotation = 0.000945565
+offset = 5124.76
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D4"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -2429.29, -2856.59 )
+rotation = 1.52965
+offset = 6857.6
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D5"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D6" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -2424.46, -2414.81 )
+rotation = 1.57226
+offset = 7300.03
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D6"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D7" type="PathFollow2D" parent="Ai Cars/Path2D"]
+position = Vector2( -2425.76, -1526.02 )
+rotation = 1.57225
+offset = 8184.87
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D/PathFollow2D7"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="Path2D2" type="Path2D" parent="Ai Cars"]
+curve = SubResource( 41 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( 1691, -4563 )
+rotation = -3.14134
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( -1180.93, -4395.23 )
+rotation = 0.00625705
+offset = 31536.2
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D2"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( -4121.35, -4568.86 )
+rotation = 3.14076
+offset = 6964.9
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D3"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( -2378.4, -967.231 )
+rotation = 0.0030781
+offset = 14306.3
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D4"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( 737.88, -1127.92 )
+rotation = -0.872195
+offset = 17506.4
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D5"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D6" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( 1734.99, -3471.68 )
+rotation = -1.56801
+offset = 41412.9
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D6"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[node name="PathFollow2D7" type="PathFollow2D" parent="Ai Cars/Path2D2"]
+position = Vector2( -5145.33, -2553.91 )
+rotation = 1.56996
+offset = 9976.75
+lookahead = 90.0
+script = ExtResource( 18 )
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2D2/PathFollow2D7"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+
+[connection signal="pressed" from="Control/CanvasLayer2/Menu/ColorRect/back" to="Control/CanvasLayer2/Menu/ColorRect/AudioStreamPlayer" method="_on_back_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer2/Menu/ColorRect/forward" to="Control/CanvasLayer2/Menu/ColorRect/AudioStreamPlayer" method="_on_forward_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer2/Menu/ColorRect/play" to="Control/CanvasLayer2/Menu/ColorRect/AudioStreamPlayer" method="_on_play_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Node2D/DrinkButton" to="Control/CanvasLayer/Node2D/DrinkButton" method="_on_Button_pressed"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Cop" method="_on_Dialog_window_dialogpass"]
+[connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button2" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button2_pressed"]
+[connection signal="input_event" from="Control/Map/Node2D/MainHouse/MainHouse" to="Control/Map/Node2D" method="_on_MainHouse_input_event"]
+[connection signal="input_event" from="Control/Map/Node2D/Hospital/Hospital" to="Control/Map/Node2D" method="_on_Hospital_input_event"]
+[connection signal="input_event" from="Control/Map/Node2D/School/School" to="Control/Map/Node2D" method="_on_School_input_event"]
+[connection signal="input_event" from="Control/Map/Node2D/Bar/Bar" to="Control/Map/Node2D" method="_on_Bar_input_event"]
+[connection signal="input_event" from="Control/Map/Node2D/Church/Church" to="Control/Map/Node2D" method="_on_Church_input_event"]
+[connection signal="input_event" from="Control/Map/Node2D/Friend/Friend" to="Control/Map/Node2D" method="_on_Friend_input_event"]
+[connection signal="body_entered" from="Control/Area2D2" to="Control/CanvasLayer/Node2D/DrinkButton" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Control/Area2D2" to="Control/CanvasLayer/Node2D/HealthLevel" method="_on_Area2D_body_entered"]
+[connection signal="carstopped" from="Control/Car" to="Control/Car/Cop" method="_on_Car_carstopped"]
+[connection signal="copvisible" from="Control/Car/Cop" to="Control/Car" method="_on_Cop_copvisible"]
+[connection signal="startmessage" from="Control/Car/Cop" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Cop_startmessage"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/blindinglights.mp3-dc99770da6ba7f3baad91464f247b52a.mp3str"
+
+[deps]
+
+source_file="res://Music/blindinglights.mp3"
+dest_files=[ "res://.import/blindinglights.mp3-dc99770da6ba7f3baad91464f247b52a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

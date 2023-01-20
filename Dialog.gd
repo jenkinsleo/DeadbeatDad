@@ -1,12 +1,13 @@
 extends ColorRect
 export(NodePath) var leftbuttonpath
 export(NodePath) var rightbuttonpath
-
+export(NodePath) var menuactivepath
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 onready var leftbutton = get_node(leftbuttonpath)
 onready var rightbutton = get_node(rightbuttonpath)
+onready var menupath = get_node(menuactivepath)
 
 #left is 0
 #right is 1
@@ -56,3 +57,10 @@ func _on_Button2_pressed():
 		visible = false
 	else:
 		emit_signal("dialogfail")
+		
+		
+func _proccess(delta):
+	if menupath.visible:
+		visible = false
+	else:
+		visible = true

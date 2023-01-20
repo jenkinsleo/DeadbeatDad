@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/onedance.mp3-4e3a5036dd167e7e33f68710bffed8ed.mp3str"
+
+[deps]
+
+source_file="res://Music/onedance.mp3"
+dest_files=[ "res://.import/onedance.mp3-4e3a5036dd167e7e33f68710bffed8ed.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

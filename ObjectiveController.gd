@@ -9,11 +9,15 @@ export var missiond = [1,2,3,4,5]
 export var current = 0
 var oldcurrent = 0
 
+var housepos = Vector2(-5340, 47)
+export(NodePath) var arrownode
 export(NodePath) var textpath
+export(NodePath) var playernode
 var textnode
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	arrownode = get_node(arrownode)
+	playernode = get_node(playernode)
 	randomize()
 	missiond.shuffle()
 	textnode = get_node(textpath)
@@ -67,7 +71,9 @@ func _on_Friend_input_event(viewport, event, shape_idx):
 			oldcurrent = current
 			current = -1
 
-
+func _physics_process(delta):
+	pass
+	
 func _process(delta):
 	#print(current)
 	if current >= 0:

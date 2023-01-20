@@ -51,6 +51,7 @@ func _ready():
 
 # Fixed Process
 func _physics_process(delta):
+	
 	if act == true:
 		current += 1
 		
@@ -154,8 +155,20 @@ func _on_Cop_copvisible():
 	input_brake = "null"
 
 
+
+
 func _on_Dialog_window_dialogpass():
 	act = false
 	input_accelerate = "up"
 	input_brake = "down"
 	current = 0
+
+
+func _on_Menu_active():
+	input_accelerate = "null"
+	input_brake = "null"
+
+
+func _on_Menu_closed():
+	input_accelerate = "up"
+	input_brake = "down"
