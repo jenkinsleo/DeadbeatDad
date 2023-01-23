@@ -153,6 +153,8 @@ func _on_Cop_copvisible():
 	act = true
 	input_accelerate = "null"
 	input_brake = "null"
+	input_steer_left = "null"
+	input_steer_right = "null"
 
 
 
@@ -162,6 +164,9 @@ func _on_Dialog_window_dialogpass():
 	input_accelerate = "up"
 	input_brake = "down"
 	current = 0
+	input_steer_left = "left"
+	input_steer_right = "right"
+	
 
 
 func _on_Menu_active():
@@ -172,3 +177,11 @@ func _on_Menu_active():
 func _on_Menu_closed():
 	input_accelerate = "up"
 	input_brake = "down"
+
+
+func _on_HealthLevel_dead():
+	act = false
+	input_accelerate = "null"
+	input_brake = "null"
+	input_steer_left = "null"
+	input_steer_right = "null"

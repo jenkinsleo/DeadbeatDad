@@ -13,7 +13,13 @@ var housepos = Vector2(-5340, 47)
 export(NodePath) var arrownode
 export(NodePath) var textpath
 export(NodePath) var playernode
+signal addscore
+
+onready var locations = {-1: $MainHouse, 1:$School, 2:$Church, 3:$Hospital, 4:$Friend, 5:$Bar}
+onready var locations_array = Array(locations.values())
+
 var textnode
+onready var prevcurrent = current
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	arrownode = get_node(arrownode)
@@ -72,9 +78,23 @@ func _on_Friend_input_event(viewport, event, shape_idx):
 			current = -1
 
 func _physics_process(delta):
-	pass
+	for location in locations_array:
+		location.modulate = Color(1,1,1)
+	print(locations.get(missiond[current]))
+	print(current)
+	
+	if current >= 0:
+		
+		locations.get(missiond[current]).modulate = Color(100,100,100)
+	else:
+		
+			
+			locations.get(current).modulate = Color(100,100,100)
 	
 func _process(delta):
+	if (current != prevcurrent):
+		emit_signal("addscore")
+	prevcurrent = current
 	#print(current)
 	if current >= 0:
 		textnode.text = missions[missiond[current]]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://addons/vehicle_controller_2d/top_down_vehicle.gd" type="Script" id=1]
 [ext_resource path="res://HealthLevel.gd" type="Script" id=2]
@@ -20,6 +20,12 @@
 [ext_resource path="res://Rotator.gd" type="Script" id=18]
 [ext_resource path="res://Graphic Packs/Car game v4/Cars/Car grey/Car grey.png" type="Texture" id=19]
 [ext_resource path="res://Aicarphysics.gd" type="Script" id=20]
+[ext_resource path="res://AiCarLooks.gd" type="Script" id=21]
+[ext_resource path="res://RedScreen.gd" type="Script" id=22]
+[ext_resource path="res://DeadLabel.gd" type="Script" id=23]
+[ext_resource path="res://ScoreScript.gd" type="Script" id=24]
+[ext_resource path="res://CopFollower.gd" type="Script" id=25]
+[ext_resource path="res://Button.tres" type="DynamicFont" id=26]
 
 [sub_resource type="DynamicFont" id=39]
 size = 13
@@ -80,6 +86,12 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=47]
+bg_color = Color( 0.435294, 0.435294, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=48]
+bg_color = Color( 0.435294, 0.435294, 0.435294, 1 )
 
 [sub_resource type="RectangleShape2D" id=31]
 
@@ -160,6 +172,11 @@ extents = Vector2( 36, 30.25 )
 [sub_resource type="RectangleShape2D" id=42]
 extents = Vector2( 35.5, 62.5 )
 
+[sub_resource type="Curve2D" id=46]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -4, 163, 0, 0, 0, 0, -4, 724 )
+}
+
 [sub_resource type="Environment" id=7]
 background_mode = 4
 background_canvas_max_layer = 1
@@ -168,13 +185,23 @@ fog_depth_end = 0.0
 dof_blur_near_enabled = true
 dof_blur_near_amount = 0.0
 dof_blur_near_quality = 2
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 1.3
+glow_blend_mode = 1
+glow_hdr_threshold = 1.31
+glow_high_quality = true
+
+[sub_resource type="DynamicFont" id=45]
+size = 22
+font_data = ExtResource( 14 )
+
+[sub_resource type="RectangleShape2D" id=44]
+extents = Vector2( 48, 53 )
 
 [sub_resource type="PhysicsMaterial" id=43]
 bounce = 0.5
 absorbent = true
-
-[sub_resource type="RectangleShape2D" id=44]
-extents = Vector2( 48, 53 )
 
 [node name="Maindriving" type="Node2D"]
 
@@ -205,10 +232,10 @@ scale = Vector2( 0.367745, 0.367745 )
 texture = ExtResource( 16 )
 
 [node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer2/Menu"]
-margin_left = -550.0
-margin_top = 261.0
-margin_right = -242.0
-margin_bottom = 365.0
+margin_left = 180.0
+margin_top = 258.0
+margin_right = 488.0
+margin_bottom = 362.0
 color = Color( 0.0117647, 0.0117647, 0.0117647, 0.521569 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -277,7 +304,8 @@ margin_bottom = 254.0
 [node name="Camera2D" type="Camera2D" parent="Control/CanvasLayer2/Menu/Control"]
 position = Vector2( -2406, -1976 )
 scale = Vector2( 5.2, 1 )
-zoom = Vector2( 7.8, 10.5 )
+offset = Vector2( 440, 200 )
+zoom = Vector2( 8.3, 11.5 )
 
 [node name="Objectives" type="ColorRect" parent="Control/CanvasLayer2"]
 margin_left = 720.0
@@ -314,6 +342,22 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Score" type="Label" parent="Control/CanvasLayer2/Objectives"]
+margin_left = -709.0
+margin_top = 517.0
+margin_right = -421.0
+margin_bottom = 610.0
+custom_fonts/font = SubResource( 38 )
+text = "Score: 100
+Boost: 1x"
+valign = 1
+autowrap = true
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+drunkpath = NodePath("../../../CanvasLayer/Node2D/DrunkLevel")
 
 [node name="Area2D" type="Area2D" parent="Control/CanvasLayer2"]
 position = Vector2( 883, 161 )
@@ -383,11 +427,11 @@ world_env_path = NodePath("../../../WorldEnvironment")
 car_path = NodePath("../../../Car")
 
 [node name="Dialog window" type="ColorRect" parent="Control/CanvasLayer/Node2D"]
-visible = false
 margin_left = -24.0
 margin_top = 436.0
 margin_right = 1050.0
 margin_bottom = 658.0
+color = Color( 0.584314, 0.584314, 0.584314, 1 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -396,19 +440,27 @@ leftbuttonpath = NodePath("Button")
 rightbuttonpath = NodePath("Button2")
 
 [node name="Button" type="Button" parent="Control/CanvasLayer/Node2D/Dialog window"]
-margin_left = 64.0
+margin_left = 51.0
 margin_top = 14.0
-margin_right = 487.0
+margin_right = 543.0
 margin_bottom = 145.0
 rect_pivot_offset = Vector2( -475, 0 )
-text = "No sir ive had nothing to drink today"
+custom_fonts/font = ExtResource( 26 )
+custom_styles/normal = SubResource( 47 )
+text = "No sir I've had nothing to drink today"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button2" type="Button" parent="Control/CanvasLayer/Node2D/Dialog window"]
-margin_left = 575.0
+margin_left = 564.0
 margin_top = 14.0
-margin_right = 1006.0
+margin_right = 1038.0
 margin_bottom = 145.0
 rect_pivot_offset = Vector2( -444, -22 )
+custom_fonts/font = ExtResource( 26 )
+custom_styles/normal = SubResource( 48 )
 text = "Yea ive had a few to drink today"
 
 [node name="Map" type="Sprite" parent="Control"]
@@ -718,42 +770,154 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 8.0
 
-[node name="Cop" type="Area2D" parent="Control/Car"]
-position = Vector2( -5, 404 )
-script = ExtResource( 5 )
+[node name="car collide" type="CollisionShape2D" parent="Control/Car"]
+position = Vector2( -4.5, 1.5 )
+shape = SubResource( 42 )
 
-[node name="ColorRect" type="ColorRect" parent="Control/Car/Cop"]
-margin_left = -36.0
-margin_top = -276.0
-margin_bottom = -113.0
+[node name="cardetector" type="ColorRect" parent="Control/Car"]
+visible = false
+margin_left = -30.0
+margin_top = 501.0
+margin_right = 10.0
+margin_bottom = 541.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Path2D" type="Path2D" parent="Control/Car"]
+curve = SubResource( 46 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Control/Car/Path2D"]
+position = Vector2( 0.999986, 595.999 )
+rotation = 1.55468
+offset = 481.4
+script = ExtResource( 25 )
+
+[node name="Cop" type="Area2D" parent="Control/Car/Path2D/PathFollow2D"]
+position = Vector2( 0, 0.000244141 )
+rotation = -1.57079
+script = ExtResource( 5 )
+minframes = 400
+maxframes = 500
+cardetectpath = NodePath("../../../cardetector")
+carpath = NodePath("../../../ColorRect/TextureRect")
+
+[node name="ColorRect" type="ColorRect" parent="Control/Car/Path2D/PathFollow2D/Cop"]
+margin_left = -40.4331
+margin_top = -85.1364
+margin_right = -4.43311
+margin_bottom = 77.8636
 rect_scale = Vector2( 2.28, 1 )
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Control/Car/Cop/ColorRect"]
-margin_left = -17.1052
-margin_right = 53.8948
-margin_bottom = 160.0
+[node name="TextureRect" type="TextureRect" parent="Control/Car/Path2D/PathFollow2D/Cop/ColorRect"]
+anchor_left = 0.511
+anchor_top = 0.5
+anchor_right = 0.511
+anchor_bottom = 0.5
+margin_left = -35.5012
+margin_top = -81.5
+margin_right = 35.4988
+margin_bottom = 78.5
 texture = ExtResource( 8 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="car collide" type="CollisionShape2D" parent="Control/Car"]
-position = Vector2( -4.5, 1.5 )
-shape = SubResource( 42 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Control"]
 environment = SubResource( 7 )
 
+[node name="GameOver" type="CanvasLayer" parent="Control"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/GameOver"]
+margin_right = 1050.0
+margin_bottom = 658.0
+color = Color( 0.823529, 0, 0, 0.505882 )
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="CanvasLayer" parent="Control"]
+layer = 5
+
+[node name="Label" type="Label" parent="Control/Text"]
+margin_right = 1050.0
+margin_bottom = 607.0
+custom_fonts/font = SubResource( 45 )
+text = "Game Over
+Final Score
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Press Enter To Quit"
+align = 1
+valign = 1
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Ai Cars" type="Node2D" parent="."]
 
+[node name="Path1" type="Node2D" parent="Ai Cars"]
+position = Vector2( -2422, 313 )
+
+[node name="1" type="Area2D" parent="Ai Cars/Path1"]
+position = Vector2( -368, -115 )
+script = ExtResource( 18 )
+nextnode = NodePath("../2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path1/1"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="2" type="Area2D" parent="Ai Cars/Path1"]
+position = Vector2( -3293, -9 )
+script = ExtResource( 18 )
+nextnode = NodePath("../3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path1/2"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="3" type="Area2D" parent="Ai Cars/Path1"]
+position = Vector2( -3188, 923 )
+script = ExtResource( 18 )
+nextnode = NodePath("../4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path1/3"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="4" type="Area2D" parent="Ai Cars/Path1"]
+position = Vector2( -260, 829 )
+script = ExtResource( 18 )
+nextnode = NodePath("../1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path1/4"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
 [node name="Aicar" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
-position = Vector2( -2450, -1753 )
-rotation = -1.16415e-10
+position = Vector2( -2813, 966 )
+rotation = -1.57079
 collision_layer = 2
 mass = 15.0
 physics_material_override = SubResource( 43 )
@@ -764,19 +928,20 @@ contact_monitor = true
 linear_damp = 1.8
 angular_damp = 1.0
 script = ExtResource( 20 )
+healthbarpath = NodePath("../../Control/CanvasLayer/Node2D/HealthLevel")
 
 [node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar"]
 position = Vector2( 21.9985, 1.03052 )
 rotation = 1.57079
 scale = Vector2( 4.49927, 4.52112 )
 texture = ExtResource( 19 )
+script = ExtResource( 21 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar"]
 polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
 
 [node name="Aicar2" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
-position = Vector2( -2376, -1120 )
-rotation = -1.16415e-10
+position = Vector2( -5228, 1105 )
 collision_layer = 2
 mass = 15.0
 physics_material_override = SubResource( 43 )
@@ -787,25 +952,17 @@ contact_monitor = true
 linear_damp = 1.8
 angular_damp = 1.0
 script = ExtResource( 20 )
+healthbarpath = NodePath("../../Control/CanvasLayer/Node2D/HealthLevel")
 
 [node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar2"]
 position = Vector2( 21.9985, 1.03052 )
 rotation = 1.57079
 scale = Vector2( 4.49927, 4.52112 )
 texture = ExtResource( 19 )
+script = ExtResource( 21 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar2"]
 polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
-
-[node name="Left" type="Node2D" parent="Ai Cars"]
-position = Vector2( -2422, 313 )
-
-[node name="Area2D" type="Area2D" parent="Ai Cars/Left"]
-script = ExtResource( 18 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Left/Area2D"]
-position = Vector2( -23, -9 )
-shape = SubResource( 44 )
 
 [connection signal="active" from="Control/CanvasLayer2/Menu" to="Control/Car" method="_on_Menu_active"]
 [connection signal="closed" from="Control/CanvasLayer2/Menu" to="Control/Car" method="_on_Menu_closed"]
@@ -813,10 +970,18 @@ shape = SubResource( 44 )
 [connection signal="pressed" from="Control/CanvasLayer2/Menu/ColorRect/forward" to="Control/CanvasLayer2/Menu/ColorRect/AudioStreamPlayer" method="_on_forward_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer2/Menu/ColorRect/play" to="Control/CanvasLayer2/Menu/ColorRect/AudioStreamPlayer" method="_on_play_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Node2D/DrinkButton" to="Control/CanvasLayer/Node2D/DrinkButton" method="_on_Button_pressed"]
+[connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/CanvasLayer2/Menu" method="_on_HealthLevel_dead"]
+[connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/Car" method="_on_HealthLevel_dead"]
+[connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/GameOver/ColorRect" method="_on_HealthLevel_dead"]
+[connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/Text/Label" method="_on_HealthLevel_dead"]
+[connection signal="dialogfail" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/CanvasLayer/Node2D/HealthLevel" method="_on_Dialog_window_dialogfail"]
 [connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car" method="_on_Dialog_window_dialogpass"]
-[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Cop" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Path2D/PathFollow2D/Cop" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/CanvasLayer2/Objectives/Score" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Path2D/PathFollow2D" method="_on_Dialog_window_dialogpass"]
 [connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button2" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button2_pressed"]
+[connection signal="addscore" from="Control/Map/Node2D" to="Control/CanvasLayer2/Objectives/Score" method="_on_Node2D_addscore"]
 [connection signal="input_event" from="Control/Map/Node2D/MainHouse/MainHouse" to="Control/Map/Node2D" method="_on_MainHouse_input_event"]
 [connection signal="input_event" from="Control/Map/Node2D/Hospital/Hospital" to="Control/Map/Node2D" method="_on_Hospital_input_event"]
 [connection signal="input_event" from="Control/Map/Node2D/School/School" to="Control/Map/Node2D" method="_on_School_input_event"]
@@ -825,11 +990,17 @@ shape = SubResource( 44 )
 [connection signal="input_event" from="Control/Map/Node2D/Friend/Friend" to="Control/Map/Node2D" method="_on_Friend_input_event"]
 [connection signal="body_entered" from="Control/Area2D2" to="Control/CanvasLayer/Node2D/DrinkButton" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Control/Area2D2" to="Control/CanvasLayer/Node2D/HealthLevel" method="_on_Area2D_body_entered"]
-[connection signal="carstopped" from="Control/Car" to="Control/Car/Cop" method="_on_Car_carstopped"]
-[connection signal="copvisible" from="Control/Car/Cop" to="Control/Car" method="_on_Cop_copvisible"]
-[connection signal="startmessage" from="Control/Car/Cop" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Cop_startmessage"]
+[connection signal="carstopped" from="Control/Car" to="Control/Car/Path2D/PathFollow2D/Cop" method="_on_Car_carstopped"]
+[connection signal="copvisible" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/Car" method="_on_Cop_copvisible"]
+[connection signal="copvisible" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/Car/Path2D/PathFollow2D" method="_on_Cop_copvisible"]
+[connection signal="startmessage" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Cop_startmessage"]
+[connection signal="body_entered" from="Ai Cars/Path1/1" to="Ai Cars/Path1/1" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path1/2" to="Ai Cars/Path1/2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path1/3" to="Ai Cars/Path1/3" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path1/4" to="Ai Cars/Path1/4" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_Aicar_body_exited"]
 [connection signal="body_exited" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_RigidBody2D_body_exited"]
 [connection signal="body_entered" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_Aicar_body_exited"]
 [connection signal="body_exited" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_RigidBody2D_body_exited"]
-[connection signal="body_entered" from="Ai Cars/Left/Area2D" to="Ai Cars/Left/Area2D" method="_on_Area2D_body_entered"]

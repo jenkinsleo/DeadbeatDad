@@ -15,12 +15,15 @@ signal closed
 
 onready var camera21 = get_node(camera2)
 onready var camera11 = get_node(maincam)
+
+var run = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	objectives = get_node(objectives)
 	canvaslayer1 = get_node(canvaslayer1)
 func _input(event):
-	if event.is_action_released("menu"):
+	
+	if event.is_action_released("menu") and run == true:
 		visible = !visible
 		
 		objectives.visible = !objectives.visible
@@ -38,3 +41,12 @@ func _input(event):
 		
 		
 		
+
+
+func _on_HealthLevel_dead():
+	run = false
+	objectives.visible = false
+	canvaslayer1.visible = false
+	camera11.current = true
+	visible = false
+	

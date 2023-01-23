@@ -1,4 +1,4 @@
-extends Area2D
+extends ColorRect
 
 
 # Declare member variables here. Examples:
@@ -6,11 +6,9 @@ extends Area2D
 # var b = "text"
 
 
-export(NodePath) var nextnode
-onready var anextnode = get_node(nextnode)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	visible = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +16,11 @@ func _ready():
 #	pass
 
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("aicar"):
-		
-		body.rotate(anextnode.global_position)
+func _on_HealthLevel_dead():
+	
+	visible = true
+	
+	
+func _process(delta):
+	if Input.is_action_pressed("ui_accept") and visible:
+		$Hopethisbreaksit.name

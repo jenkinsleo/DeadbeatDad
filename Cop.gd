@@ -7,6 +7,7 @@ var currentframes = 0
 var dedframes = 0
 var activecount = false
 var emitonce = false
+var pos = Vector2()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -14,26 +15,37 @@ var emitonce = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	visible = false # Replace with function body.
+	visible = true # Replace with function body.
+	
 
 signal copvisible
 signal startmessage
+var run = false
+export(NodePath) var cardetectpath
+export(NodePath) var carpath
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 func _physics_process(delta):
+
 	if activecount == false:
 		dedframes = rng.randf_range(minframes, maxframes)
 		print(dedframes)
 		activecount = true
+		run = true
 	else:
 		if currentframes >= dedframes:
+			
 			visible = true
 			emit_signal("copvisible")
 			
+			
+			
 		else:
 			currentframes += 1
+
+
 
 
 func _on_Car_carstopped():
