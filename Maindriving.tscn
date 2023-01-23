@@ -291,7 +291,7 @@ songs = {
 1: [ "More M's - Drake, 21 Savage", "res://Music/morem.mp3" ],
 2: [ "Blinding Lights - The Weeknd", "res://Music/blindinglights.mp3" ],
 3: [ "No Lie - Sean Paul, Dua Lipa", "res://Music/nolie.mp3" ],
-4: [ "One Dance - Drake, Leo", "res://Music/onedance.mp3" ]
+4: [ "One Dance - Drake, Leo", "res://Music/onedance1.mp3" ]
 }
 atext = NodePath("../Label")
 
@@ -874,6 +874,95 @@ __meta__ = {
 
 [node name="Ai Cars" type="Node2D" parent="."]
 
+[node name="Path3" type="Node2D" parent="Ai Cars"]
+position = Vector2( -2090, -2269 )
+rotation = 3.14159
+
+[node name="1" type="Area2D" parent="Ai Cars/Path3"]
+position = Vector2( -1165.99, -1125.01 )
+script = ExtResource( 18 )
+nextnode = NodePath("../2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path3/1"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="2" type="Area2D" parent="Ai Cars/Path3"]
+position = Vector2( -1250, 1045.99 )
+script = ExtResource( 18 )
+nextnode = NodePath("../3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path3/2"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="3" type="Area2D" parent="Ai Cars/Path3"]
+position = Vector2( -3109, 976.986 )
+script = ExtResource( 18 )
+nextnode = NodePath("../4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path3/3"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="4" type="Area2D" parent="Ai Cars/Path3"]
+position = Vector2( -2981.99, -1203.01 )
+script = ExtResource( 18 )
+nextnode = NodePath("../1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path3/4"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="Aicar" type="RigidBody2D" parent="Ai Cars/Path3" groups=["aicar"]]
+position = Vector2( -1300, 949.994 )
+rotation = -1.57079
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path3/Aicar"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path3/Aicar"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar2" type="RigidBody2D" parent="Ai Cars/Path3" groups=["aicar"]]
+position = Vector2( -2910.99, -1153.01 )
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path3/Aicar2"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path3/Aicar2"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
 [node name="Path1" type="Node2D" parent="Ai Cars"]
 position = Vector2( -2422, 313 )
 
@@ -913,8 +1002,8 @@ nextnode = NodePath("../1")
 position = Vector2( -23, -9 )
 shape = SubResource( 44 )
 
-[node name="Aicar" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
-position = Vector2( -2813, 966 )
+[node name="Aicar" type="RigidBody2D" parent="Ai Cars/Path1" groups=["aicar"]]
+position = Vector2( -391, 653 )
 rotation = -1.57079
 collision_layer = 2
 mass = 15.0
@@ -926,7 +1015,144 @@ contact_monitor = true
 linear_damp = 1.8
 angular_damp = 1.0
 script = ExtResource( 20 )
-healthbarpath = NodePath("../../Control/CanvasLayer/Node2D/HealthLevel")
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path1/Aicar"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path1/Aicar"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar2" type="RigidBody2D" parent="Ai Cars/Path1" groups=["aicar"]]
+position = Vector2( -2806, 792 )
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path1/Aicar2"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path1/Aicar2"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Path2" type="Node2D" parent="Ai Cars"]
+position = Vector2( -2029, -1936 )
+
+[node name="1" type="Area2D" parent="Ai Cars/Path2"]
+position = Vector2( -382, -1450 )
+script = ExtResource( 18 )
+nextnode = NodePath("../2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path2/1"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="2" type="Area2D" parent="Ai Cars/Path2"]
+position = Vector2( -3211, -1258 )
+script = ExtResource( 18 )
+nextnode = NodePath("../3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path2/2"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="3" type="Area2D" parent="Ai Cars/Path2"]
+position = Vector2( -3062, 968 )
+script = ExtResource( 18 )
+nextnode = NodePath("../4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path2/3"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="4" type="Area2D" parent="Ai Cars/Path2"]
+position = Vector2( -260, 829 )
+script = ExtResource( 18 )
+nextnode = NodePath("../1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ai Cars/Path2/4"]
+position = Vector2( -23, -9 )
+shape = SubResource( 44 )
+
+[node name="Aicar" type="RigidBody2D" parent="Ai Cars/Path2" groups=["aicar"]]
+position = Vector2( -391, 653 )
+rotation = -1.57079
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2/Aicar"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path2/Aicar"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar2" type="RigidBody2D" parent="Ai Cars/Path2" groups=["aicar"]]
+position = Vector2( -2806, 792 )
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Path2/Aicar2"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Path2/Aicar2"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
+position = Vector2( -836, -1377 )
+rotation = -1.57079
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
 
 [node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar"]
 position = Vector2( 21.9985, 1.03052 )
@@ -939,7 +1165,8 @@ script = ExtResource( 21 )
 polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
 
 [node name="Aicar2" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
-position = Vector2( -5228, 1105 )
+position = Vector2( -2434, -2296 )
+rotation = -1.57079
 collision_layer = 2
 mass = 15.0
 physics_material_override = SubResource( 43 )
@@ -950,7 +1177,7 @@ contact_monitor = true
 linear_damp = 1.8
 angular_damp = 1.0
 script = ExtResource( 20 )
-healthbarpath = NodePath("../../Control/CanvasLayer/Node2D/HealthLevel")
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
 
 [node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar2"]
 position = Vector2( 21.9985, 1.03052 )
@@ -960,6 +1187,105 @@ texture = ExtResource( 19 )
 script = ExtResource( 21 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar2"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar3" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
+position = Vector2( -82, -3203 )
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar3"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar3"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar4" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
+position = Vector2( -3699, -3194 )
+rotation = -3.14159
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar4"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar4"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar5" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
+position = Vector2( 944, -2209 )
+rotation = 1.57079
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar5"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar5"]
+polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
+
+[node name="Aicar6" type="RigidBody2D" parent="Ai Cars" groups=["aicar"]]
+position = Vector2( -5155, -2093 )
+rotation = -4.71238
+collision_layer = 2
+mass = 15.0
+physics_material_override = SubResource( 43 )
+gravity_scale = 0.0
+continuous_cd = 2
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 1.8
+angular_damp = 1.0
+script = ExtResource( 20 )
+healthbarpath = NodePath("../../../Control/CanvasLayer/Node2D/HealthLevel")
+
+[node name="CarGrey" type="Sprite" parent="Ai Cars/Aicar6"]
+position = Vector2( 21.9985, 1.03052 )
+rotation = 1.57079
+scale = Vector2( 4.49927, 4.52112 )
+texture = ExtResource( 19 )
+script = ExtResource( 21 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ai Cars/Aicar6"]
 polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378, 93.9382, -22.2621, 79.9019, -35.223, -36.0977, -34.8994, -49.0583, -20.863, -49.9355, 23.1395, -34.8967, 37.0977, 80.1028, 36.7767 )
 
 [connection signal="active" from="Control/CanvasLayer2/Menu" to="Control/Car" method="_on_Menu_active"]
@@ -973,10 +1299,10 @@ polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378
 [connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/GameOver/ColorRect" method="_on_HealthLevel_dead"]
 [connection signal="dead" from="Control/CanvasLayer/Node2D/HealthLevel" to="Control/Text/Label" method="_on_HealthLevel_dead"]
 [connection signal="dialogfail" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/CanvasLayer/Node2D/HealthLevel" method="_on_Dialog_window_dialogfail"]
-[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car" method="_on_Dialog_window_dialogpass"]
-[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Path2D/PathFollow2D/Cop" method="_on_Dialog_window_dialogpass"]
 [connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/CanvasLayer2/Objectives/Score" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car" method="_on_Dialog_window_dialogpass"]
 [connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Path2D/PathFollow2D" method="_on_Dialog_window_dialogpass"]
+[connection signal="dialogpass" from="Control/CanvasLayer/Node2D/Dialog window" to="Control/Car/Path2D/PathFollow2D/Cop" method="_on_Dialog_window_dialogpass"]
 [connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Node2D/Dialog window/Button2" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Button2_pressed"]
 [connection signal="addscore" from="Control/Map/Node2D" to="Control/CanvasLayer2/Objectives/Score" method="_on_Node2D_addscore"]
@@ -992,13 +1318,51 @@ polygon = PoolVector2Array( 11.9973, -1.03345, 80.1028, 36.7767, 94.061, 21.7378
 [connection signal="copvisible" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/Car" method="_on_Cop_copvisible"]
 [connection signal="copvisible" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/Car/Path2D/PathFollow2D" method="_on_Cop_copvisible"]
 [connection signal="startmessage" from="Control/Car/Path2D/PathFollow2D/Cop" to="Control/CanvasLayer/Node2D/Dialog window" method="_on_Cop_startmessage"]
+[connection signal="body_entered" from="Ai Cars/Path3/1" to="Ai Cars/Path3/1" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path3/2" to="Ai Cars/Path3/2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path3/3" to="Ai Cars/Path3/3" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path3/4" to="Ai Cars/Path3/4" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path3/Aicar" to="Ai Cars/Path3/Aicar" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path3/Aicar" to="Ai Cars/Path3/Aicar" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path3/Aicar" to="Ai Cars/Path3/Aicar" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Path3/Aicar2" to="Ai Cars/Path3/Aicar2" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path3/Aicar2" to="Ai Cars/Path3/Aicar2" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path3/Aicar2" to="Ai Cars/Path3/Aicar2" method="_on_Aicar_body_exited"]
 [connection signal="body_entered" from="Ai Cars/Path1/1" to="Ai Cars/Path1/1" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Ai Cars/Path1/2" to="Ai Cars/Path1/2" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Ai Cars/Path1/3" to="Ai Cars/Path1/3" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Ai Cars/Path1/4" to="Ai Cars/Path1/4" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path1/Aicar" to="Ai Cars/Path1/Aicar" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path1/Aicar" to="Ai Cars/Path1/Aicar" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path1/Aicar" to="Ai Cars/Path1/Aicar" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Path1/Aicar2" to="Ai Cars/Path1/Aicar2" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path1/Aicar2" to="Ai Cars/Path1/Aicar2" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path1/Aicar2" to="Ai Cars/Path1/Aicar2" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Path2/1" to="Ai Cars/Path2/1" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path2/2" to="Ai Cars/Path2/2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path2/3" to="Ai Cars/Path2/3" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path2/4" to="Ai Cars/Path2/4" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Ai Cars/Path2/Aicar" to="Ai Cars/Path2/Aicar" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path2/Aicar" to="Ai Cars/Path2/Aicar" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path2/Aicar" to="Ai Cars/Path2/Aicar" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Path2/Aicar2" to="Ai Cars/Path2/Aicar2" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Path2/Aicar2" to="Ai Cars/Path2/Aicar2" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Path2/Aicar2" to="Ai Cars/Path2/Aicar2" method="_on_Aicar_body_exited"]
 [connection signal="body_entered" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_RigidBody2D_body_entered"]
-[connection signal="body_exited" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_Aicar_body_exited"]
 [connection signal="body_exited" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar" to="Ai Cars/Aicar" method="_on_Aicar_body_exited"]
 [connection signal="body_entered" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_RigidBody2D_body_entered"]
-[connection signal="body_exited" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_Aicar_body_exited"]
 [connection signal="body_exited" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar2" to="Ai Cars/Aicar2" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Aicar3" to="Ai Cars/Aicar3" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar3" to="Ai Cars/Aicar3" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar3" to="Ai Cars/Aicar3" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Aicar4" to="Ai Cars/Aicar4" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar4" to="Ai Cars/Aicar4" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar4" to="Ai Cars/Aicar4" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Aicar5" to="Ai Cars/Aicar5" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar5" to="Ai Cars/Aicar5" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar5" to="Ai Cars/Aicar5" method="_on_Aicar_body_exited"]
+[connection signal="body_entered" from="Ai Cars/Aicar6" to="Ai Cars/Aicar6" method="_on_RigidBody2D_body_entered"]
+[connection signal="body_exited" from="Ai Cars/Aicar6" to="Ai Cars/Aicar6" method="_on_RigidBody2D_body_exited"]
+[connection signal="body_exited" from="Ai Cars/Aicar6" to="Ai Cars/Aicar6" method="_on_Aicar_body_exited"]

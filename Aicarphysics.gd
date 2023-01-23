@@ -43,7 +43,6 @@ func _on_RigidBody2D_body_entered(body):
 			runkill = false
 		
 		if run:
-			
 			health.crash(body._velocity.length())
 			
 			get_child(0).crash(body._velocity.length())
