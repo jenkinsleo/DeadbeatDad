@@ -50,3 +50,7 @@ func _on_HealthLevel_dead():
 	camera11.current = true
 	visible = false
 	
+
+
+func _on_play_pressed():
+	pass # Replace with function body.
